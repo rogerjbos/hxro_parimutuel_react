@@ -4,7 +4,6 @@ import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
 import { ParimutuelWeb3, PositionSideEnum, WalletSigner, DEV_CONFIG, MarketPairEnum, getMarketPubkeys } from '@hxronetwork/parimutuelsdk';
 
-
 export const SendTransaction: FC = () => {
     const { connection } = useConnection();
     const { publicKey, signTransaction } = useWallet();
