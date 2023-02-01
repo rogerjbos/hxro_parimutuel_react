@@ -7,9 +7,9 @@ import { ParimutuelWeb3, PositionSideEnum, WalletSigner, DEV_CONFIG, MarketPairE
 
 export const SendTransaction: FC = () => {
     const { connection } = useConnection();
-    const { publicKey } = useWallet();
-
+    const { publicKey, signTransaction } = useWallet();
     const wallet = useWallet()
+
     const config = DEV_CONFIG;
     const parimutuelWeb3 = new ParimutuelWeb3(config, connection);
 
@@ -33,8 +33,7 @@ export const SendTransaction: FC = () => {
               );
         const pubkey = pari_markets[0].pubkey.toString();
 
-        let transactionId: string = ''
-
+        let transactionId: string = '';
         try {
 
                 transactionId = await parimutuelWeb3.placePosition(
@@ -46,8 +45,8 @@ export const SendTransaction: FC = () => {
             )
 
             if (transactionId) {
-                console.log('MAMAGUEVO', transactionId);
-                notify({ type: 'success', message: 'LFG you placed a position', txid: transactionId });
+                console.log('Transaction: ', transactionId);
+                notify({ type: 'success', message: `Placed ${'LONG'} Position`, txid: transactionId });
             }
 
         } catch (error: any) {
@@ -55,7 +54,7 @@ export const SendTransaction: FC = () => {
             console.log('error', `Transaction failed! ${error?.message}`, transactionId);
             return;
         }
-    }, [publicKey, notify, connection]);
+    }, [publicKey, notify, connection, signTransaction]);
 
     return (
         <div>

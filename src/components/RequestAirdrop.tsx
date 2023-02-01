@@ -1,27 +1,24 @@
 import { useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { LAMPORTS_PER_SOL, TransactionSignature, PublicKey } from '@solana/web3.js';
+import { PublicKey, TransactionSignature } from '@solana/web3.js';
 import { FC, useCallback } from 'react';
 import { notify } from "../utils/notifications";
-import useUserSOLBalanceStore from '../stores/useUserSOLBalanceStore';
 import { ParimutuelWeb3, PositionSideEnum, WalletSigner, DEV_CONFIG, MarketPairEnum, getMarketPubkeys } from '@hxronetwork/parimutuelsdk';
 
 
-export const RequestAirdrop: FC = () => {
+export const RequestAirdrop: FC = () =>{
     const { connection } = useConnection();
-    const { publicKey } = useWallet();
-    const { getUserSOLBalance } = useUserSOLBalanceStore();
-
+    const { publicKey, sendTransaction } = useWallet();
     const wallet = useWallet()
+
     const config = DEV_CONFIG;
     const parimutuelWeb3 = new ParimutuelWeb3(config, connection);
 
     const onClick = useCallback(async () => {
         if (!publicKey) {
-            console.log('error', 'Wallet not connected!');
-            notify({ type: 'error', message: 'error', description: 'Wallet not connected!' });
+            notify({ type: 'error', message: `Wallet not connected!` });
+            console.log('error', `Send Transaction: Wallet not connected!`);
             return;
         }
-
         const market = MarketPairEnum.BTCUSD;
         const markets = getMarketPubkeys(config, market);
         const marketsByTime = markets.filter((market) => market.duration === 60 * 5);
@@ -43,7 +40,7 @@ export const RequestAirdrop: FC = () => {
                 wallet as WalletSigner,
                 new PublicKey(pubkey),
                 parseFloat('100') * (10 ** 9 / 1),
-                PositionSideEnum.LONG,
+                PositionSideEnum.SHORT,
                 Date.now(),
             )
 
@@ -55,22 +52,26 @@ export const RequestAirdrop: FC = () => {
 
             // signature = await sendTransaction(transaction, connection);
             notify({ type: 'success', message: 'Transaction successful!', txid: signature });
-
         } catch (error: any) {
-            notify({ type: 'error', message: `Airdrop failed!`, description: error?.message, txid: signature });
-            console.log('error', `Airdrop failed! ${error?.message}`, signature);
+            notify({ type: 'error', message: `Transaction failed!`, description: error?.message, txid: signature });
+            console.log('error', `Transaction failed! ${error?.message}`, signature);
+            return;
         }
-    }, [publicKey, connection, getUserSOLBalance]);
+    }, [publicKey, notify, connection, sendTransaction]);
 
     return (
         <div>
             <button
-                className="px-8 m-2 btn animate-pulse bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ..."
-                onClick={onClick}
+                className="group w-60 m-2 btn animate-pulse disabled:animate-none bg-gradient-to-r from-[#9945FF] to-[#14F195] hover:from-pink-500 hover:to-yellow-500 ... "
+                onClick={onClick} disabled={!publicKey}
             >
-                <span>Airdrop 1 </span>
+                <div className="hidden group-disabled:block ">
+                    Wallet not connected
+                </div>
+                <span className="block group-disabled:hidden" > 
+                    Place 100 USDC Short
+                </span>
             </button>
         </div>
     );
 };
-
