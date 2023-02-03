@@ -2,8 +2,6 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { FC, useState } from "react";
 import {
     ParimutuelWeb3,
-    PositionSideEnum,
-    WalletSigner,
     DEV_CONFIG,
     MarketPairEnum,
     getMarketPubkeys,
