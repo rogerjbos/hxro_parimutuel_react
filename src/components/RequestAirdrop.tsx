@@ -45,7 +45,7 @@ export const RequestAirdrop: FC = () =>{
             )
 
             if (transactionId) {
-                console.log('MAMAGUEVO', transactionId);
+                console.log('txnid: ', transactionId);
                 notify({ type: 'success', message: 'LFG you placed a position', txid: transactionId });
             }
 

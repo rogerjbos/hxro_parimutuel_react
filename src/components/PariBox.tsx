@@ -10,6 +10,7 @@ import {
     calculateNetOdd,
 } from "@hxronetwork/parimutuelsdk";
 import { useEffect } from "react";
+import PlacePositionBox from './PlacePositionBox'
 
 interface PariObj {
     longPool: any; // This is how much money is in the Long Pool of the contest
@@ -76,6 +77,8 @@ export const PariBox: FC<{ time: string }> = (props) => {
                 const parimutuels = await parimutuelWeb3.getParimutuels(marketsByTime);
                 const duration = marketsByTime[0].duration;
 
+                const getMarkets = await parimutuelWeb3.getMarkets(market)
+
                 const pari_markets = parimutuels.filter(
                     (account) =>
                         account.info.parimutuel.timeWindowStart.toNumber() > Date.now() &&
@@ -117,6 +120,7 @@ export const PariBox: FC<{ time: string }> = (props) => {
                 shortPool = shortPool.toFixed(2)
 
                 setPariObj({ longPool, shortPool, longOdds, shortOdds, pubkey });
+                
             } catch (error) {
                 console.error(error);
             }
@@ -137,7 +141,7 @@ export const PariBox: FC<{ time: string }> = (props) => {
                 width: "250px",
                 alignItems: "center",
             }}>
-                <h1>{timeTitle}</h1>
+                <h1 style={{fontWeight: 'bold', fontSize:'30px', marginBottom:'10px'}}>{timeTitle}</h1>
                 <div
                     style={{
                         display: "flex",
@@ -183,6 +187,9 @@ export const PariBox: FC<{ time: string }> = (props) => {
                         </p>
                         <p style={{ color: "white", fontWeight: "bold" }}>{countDownTime}</p>
                     </div>
+                </div>
+                <div style={{marginTop:'20px'}}>
+                   <PlacePositionBox pubkey={pariObj? pariObj.pubkey : 'Loading'}/>
                 </div>
             </div>
 
