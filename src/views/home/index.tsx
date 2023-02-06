@@ -34,17 +34,17 @@ export const HomeView: FC = ({ }) => {
         <h1 className="text-center text-5xl md:pl-12 font-bold text-transparent bg-clip-text bg-gradient-to-tr from-[#9945FF] to-[#14F195]">
           Parimutuel Protocol
         </h1>
-        {wallet && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}
+        {wallet && <p className="text-center" >SOL Balance: {(balance || 0).toLocaleString()}</p>}
         <div className="text-center" style={{ alignContent: 'center' }}>
-          <div className="flex items-center justify-between">
-            <div className="mx-5 my-5"><PariBox time={'1M'} /></div>
-            <div className="mx-5 my-5"><PariBox time={'5M'} /></div>
-            <div className="mx-5 my-5"><PariBox time={'15M'} /></div>
-            <div className="mx-5 my-5"><PariBox time={'1H'} /></div>
-            <div className="mx-5 my-5"><PariBox time={'1D'} /></div>
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'5M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'15M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1H'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1D'} /></div>
           </div>
           <div className="mx-auto" style={{ width: '100%' }}>
-          <PositionsDisplay />
+            <PositionsDisplay />
           </div>
         </div>
       </div>
