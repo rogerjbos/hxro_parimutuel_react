@@ -8,6 +8,12 @@ import {
 import { useEffect } from "react";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
+{/*
+
+FIXING THIS COMPONENT, THE SDK FUNCTIONS HAVE TO BE UPDATED
+
+*/}
+
 const PositionsDisplay: FC = () => {
 
 
@@ -21,8 +27,11 @@ const PositionsDisplay: FC = () => {
 
     useEffect(() => {
         const getPositions = async () => {
-            // const getMarkets = await parimutuelWeb3.getMarkets(market)
-            // const positions = await parimutuelWeb3.getParimutuelPositions(publicKey)
+            const getMarkets = await parimutuelWeb3.getMarkets(market)
+            // console.log('getMarkets: ', getMarkets)
+            // const positions = await parimutuelWeb3.getUserPositions(publicKey, getMarkets)
+            // console.log('getMarkets: ', positions)
+
 
             // setPositionsArr(positions)
 
