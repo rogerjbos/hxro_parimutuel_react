@@ -12,6 +12,9 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 
 FIXING THIS COMPONENT, THE SDK FUNCTIONS HAVE TO BE UPDATED
 
+As soon as the SDK functions are fixed, the Tutorial will be updated to include 
+getUserPostions() and destroyPosition
+
 */}
 
 const PositionsDisplay: FC = () => {

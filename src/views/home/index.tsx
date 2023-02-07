@@ -41,7 +41,7 @@ export const HomeView: FC = ({ }) => {
             <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'5M'} /></div>
             <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'15M'} /></div>
             <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1H'} /></div>
-            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1D'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0 md:mb-0"><PariBox time={'1D'} /></div>
           </div>
           <div className="mx-auto" style={{ width: '100%' }}>
             <PositionsDisplay />
@@ -49,7 +49,6 @@ export const HomeView: FC = ({ }) => {
         </div>
       </div>
     </div>
-
   );
 };
 
