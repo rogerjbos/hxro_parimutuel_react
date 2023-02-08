@@ -10,9 +10,6 @@ import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
 //Pari Box
 import { PariBox } from '../../components/PariBox';
 
-//Position Display Box
-import PositionsDisplay from '../../components/PositionsDisplay'
-
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
@@ -42,9 +39,6 @@ export const HomeView: FC = ({ }) => {
             <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'15M'} /></div>
             <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1H'} /></div>
             <div className="mx-5 my-5 mb-5 md:mb-0 md:mb-0"><PariBox time={'1D'} /></div>
-          </div>
-          <div className="mx-auto" style={{ width: '100%' }}>
-            <PositionsDisplay />
           </div>
         </div>
       </div>

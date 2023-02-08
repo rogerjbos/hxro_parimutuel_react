@@ -2,14 +2,15 @@ import { useConnection, useWallet } from '@solana/wallet-adapter-react';
 import { PublicKey } from '@solana/web3.js';
 import { FC, useCallback, useEffect } from 'react';
 import { notify } from "../utils/notifications";
-import { ParimutuelWeb3, PositionSideEnum, WalletSigner, DEV_CONFIG } from '@hxronetwork/parimutuelsdk';
+import { ParimutuelWeb3, PositionSideEnum, WalletSigner } from '@hxronetwork/parimutuelsdk';
+import { PariConfig } from './Config';
 
 const PlacePosition: FC<{pariPubkey: string, side: PositionSideEnum, amount: string}> = (props) => {
     const { connection } = useConnection();
     const { publicKey, signTransaction } = useWallet();
     const wallet = useWallet()
 
-    const config = DEV_CONFIG;
+    const { config } = PariConfig;
     const parimutuelWeb3 = new ParimutuelWeb3(config, connection);
 
     const {pariPubkey, side, amount} = props

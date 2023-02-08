@@ -2,13 +2,13 @@ import { useConnection } from "@solana/wallet-adapter-react";
 import { FC, useState } from "react";
 import {
     ParimutuelWeb3,
-    DEV_CONFIG,
     MarketPairEnum,
     getMarketPubkeys,
     calculateNetOdd,
 } from "@hxronetwork/parimutuelsdk";
 import { useEffect } from "react";
 import PlacePositionBox from './PlacePositionBox'
+import { PariConfig } from "./Config";
 
 interface PariObj {
     longPool: any; // This is how much money is in the Long Pool of the contest
@@ -60,7 +60,7 @@ export const PariBox: FC<{ time: string }> = (props) => {
     const [pariObj, setPariObj] = useState<PariObj>();
     const [countDownTime, setCountDownTime] = useState<string>("");
 
-    const config = DEV_CONFIG;
+    const { config } = PariConfig;
     const parimutuelWeb3 = new ParimutuelWeb3(config, connection);
 
     const market = MarketPairEnum.BTCUSD;
@@ -68,21 +68,20 @@ export const PariBox: FC<{ time: string }> = (props) => {
     const marketsByTime = markets.filter(
         (market) => market.duration === timeSeconds
     );
-
     useEffect(() => {
         const getPariData = async () => {
             try {
+                localStorage.clear();
                 const parimutuels = await parimutuelWeb3.getParimutuels(marketsByTime);
                 const duration = marketsByTime[0].duration;
-
-                const getMarkets = await parimutuelWeb3.getMarkets(market)
-
+                
                 const pari_markets = parimutuels.filter(
                     (account) =>
                         account.info.parimutuel.timeWindowStart.toNumber() > Date.now() &&
                         account.info.parimutuel.timeWindowStart.toNumber() <
                         Date.now() + duration * 1000
                 );
+
 
                 let longPool: any =
                     (pari_markets[0].info.parimutuel.activeLongPositions.toNumber() /
@@ -190,7 +189,6 @@ export const PariBox: FC<{ time: string }> = (props) => {
                    <PlacePositionBox pubkey={pariObj? pariObj.pubkey : 'Loading'}/>
                 </div>
             </div>
-
         </div>
     );
 };
