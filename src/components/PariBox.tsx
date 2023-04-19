@@ -1,4 +1,4 @@
-import { useConnection } from "@solana/wallet-adapter-react";
+import {Connection} from "@solana/web3.js"
 import { FC, useState } from "react";
 import {
     ParimutuelWeb3,
@@ -55,7 +55,8 @@ export const PariBox: FC<{ time: string }> = (props) => {
     const timeSeconds = selectedTime[0].seconds
     const timeTitle = selectedTime[0].title
 
-    const { connection } = useConnection();
+    const rpc = "https://nd-070-591-757.p2pify.com/fa53d9d2d104b54693cc40532921c340" // use your RPC instead (this one is not active)
+    const connection = new Connection(rpc, 'confirmed')
 
     const [pariObj, setPariObj] = useState<PariObj>();
     const [countDownTime, setCountDownTime] = useState<string>("");
