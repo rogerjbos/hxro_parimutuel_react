@@ -7,6 +7,10 @@ import { useWallet, useConnection } from '@solana/wallet-adapter-react';
 // Store
 import useUserSOLBalanceStore from '../../stores/useUserSOLBalanceStore';
 
+//Pari Box
+import { PariBox } from '../../components/PariBox';
+
+
 export const HomeView: FC = ({ }) => {
   const wallet = useWallet();
   const { connection } = useConnection();
@@ -31,6 +35,18 @@ export const HomeView: FC = ({ }) => {
         {wallet && <p>SOL Balance: {(balance || 0).toLocaleString()}</p>}
         <div className="text-center" style={{ alignContent: 'center', marginTop: '30px', fontSize: '25px' }}>
           {/*Place components bellow*/}
+
+          <div className="text-center" style={{ alignContent: 'center' }}>
+          <div className="flex flex-col items-center justify-between md:flex-row">
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'5M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'15M'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0"><PariBox time={'1H'} /></div>
+            <div className="mx-5 my-5 mb-5 md:mb-0 md:mb-0"><PariBox time={'1D'} /></div>
+          </div>
+</div>
+
+
         </div>
       </div>
     </div>
