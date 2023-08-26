@@ -707,4 +707,4 @@ And that’s it, if you run your application you should be able to see this:
 
 Now you and any of your users can set their position amounts and place positions for whichever side they want for the time interval that they selected in the BTC-USD Devnet Parimutuel Market
 
-**Up Next:** V2 of this Parimutuel UI Project Walkthrough with more functionalities from the Parimutuel TS SDK
+**Up Next:** V2 of this Parimutuel UI Project Walkthrough with more functionalities from the Parimutuel TS SDK# hxro_parimutuel_react
