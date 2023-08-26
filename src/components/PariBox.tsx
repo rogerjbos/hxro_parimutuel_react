@@ -165,3 +165,74 @@ export const PariBox: FC<{ time: string }> = (props) => {
     const intervalId = setInterval(() => getPariData(), 1000);
     return () => clearInterval(intervalId);
     }, []);
+
+    return (
+        <div>
+            <div style={{
+                padding: 10,
+                border: "1px solid white",
+                borderRadius: "10px",
+                boxSizing: "border-box",
+                width: "250px",
+                alignItems: "center",
+            }}>
+                <h1 style={{fontWeight: 'bold', fontSize:'30px', marginBottom:'10px'}}>{timeTitle}</h1>
+                <div
+                    style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                    }}
+                >
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            marginRight: "5px",
+                        }}
+                    >
+                        <p style={{ color: "white" }}>Long Pool:</p>
+                        <p style={{ color: "white" }}>Short Pool:</p>
+                        <p style={{ color: "white" }}>Long Odds:</p>
+                        <p style={{ color: "white" }}>Short Odds:</p>
+                        <p style={{ color: "white" }}>Starts In:</p>
+                    </div>
+                    <div
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-end",
+                            marginLeft: "5px",
+                        }}
+                    >
+                        <p style={{ color: "white", fontWeight: "bold" }}></p>
+                        <p style={{ color: "white", fontWeight: "bold" }}>
+                            {pariObj ? pariObj.longPool : "0"}
+                        </p>
+                        <p style={{ color: "white", fontWeight: "bold" }}>
+                            {pariObj ? pariObj.shortPool : "0"}
+                        </p>
+                        <p style={{ color: "white", fontWeight: "bold" }}>
+                            {pariObj ? pariObj.longOdds : "0"}
+                        </p>
+                        <p style={{ color: "white", fontWeight: "bold" }}>
+                            {pariObj ? pariObj.shortOdds : "0"}
+                        </p>
+                        <p style={{ color: "white", fontWeight: "bold" }}>{countDownTime}</p>
+                    </div>
+                </div>
+{/* 
+
+Here is where we are going to be using the PlacePositionBox.tsx component
+
+                <div style={{marginTop:'20px'}}>
+                   <PlacePositionBox pubkey={pariObj? pariObj.pubkey : 'Loading'}/>
+                </div>
+*/}
+            </div>
+
+        </div>
+);
+
