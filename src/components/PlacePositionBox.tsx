@@ -1,6 +1,8 @@
 
 import { PositionSideEnum } from '@hxronetwork/parimutuelsdk'; import React, { FC, useState } from 'react'; import { useEffect } from 'react';
 
+import PlacePosition from './PlacePosition'
+
 const PlacePositionBox: FC<{ pubkey: string }> = (props) => {
     const { pubkey } = props
 
@@ -39,15 +41,12 @@ const PlacePositionBox: FC<{ pubkey: string }> = (props) => {
                     placeholder={inputValue}
                     style={{ color: 'black', borderRadius: '10px', display: 'inline-block', textAlign: 'center', }}
                 />
-        {/*
-        Here is where we are going to use the PlacePostion component and 
-        pass it in amount and pubkey to place the position of the user
-        
+            
             <div style={{ marginLeft: '-15px', marginTop: '10px' }}>
                 <PlacePosition amount={amount} pariPubkey={pubkey} side={PositionSideEnum.LONG}/>
                 <PlacePosition amount={amount} pariPubkey={pubkey} side={PositionSideEnum.SHORT} />
             </div>
-        */}
+
             </div>
     );
 };
